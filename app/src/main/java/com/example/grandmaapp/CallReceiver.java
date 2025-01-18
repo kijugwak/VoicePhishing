@@ -18,9 +18,12 @@ public class CallReceiver extends BroadcastReceiver {
             if (phoneNumber != null) {
                 Log.d("CallReceiver", "전화번호: " + phoneNumber);
                 sendSMS(context, phoneNumber);
+            } else {
+                Log.d("CallReceiver", "전화번호가 null입니다.");
             }
         }
     }
+
 
     // 문자 메시지 보내기
     private void sendSMS(Context context, String phoneNumber) {

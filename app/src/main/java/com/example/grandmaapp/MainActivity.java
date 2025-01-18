@@ -8,6 +8,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.SmsManager;
 import android.widget.Toast;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -58,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 super.onCallStateChanged(state, incomingNumber);
+                Log.d("PhoneStateListener", "전화 상태: " + state + ", 전화번호: " + incomingNumber);
 
-                // 전화가 올 때
                 if (state == TelephonyManager.CALL_STATE_RINGING) {
                     incomingPhoneNumber = incomingNumber;
                     sendSmsToMyNumber(incomingPhoneNumber);  // 전화번호를 내 번호로 문자로 전송
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
     }
+
 
     // 내 번호로 전화번호 문자 전송
     private void sendSmsToMyNumber(String phoneNumber) {
